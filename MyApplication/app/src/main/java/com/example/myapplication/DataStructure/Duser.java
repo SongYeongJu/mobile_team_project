@@ -1,5 +1,7 @@
 package com.example.myapplication.DataStructure;
 
+import java.io.Serializable;
+
 /**
  * Created by YoungJu on 2017-12-12.
  */
@@ -8,7 +10,7 @@ package com.example.myapplication.DataStructure;
 3. Item : 이름(name), 무게(weight), 도착지(dx, dy), 도착시간(dt), 출발지(sx, sy), 출발시간(st), 접수여부(order)
 ----------------------db
 */
-public class Duser {
+public class Duser implements Serializable {
 
     private String name;
     private int money;

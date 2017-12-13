@@ -24,8 +24,10 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.Client.Client;
 import com.example.myapplication.R;
@@ -141,12 +143,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-
-        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(intent);
-
-        finish();
-
+        CheckBox checkBox;
+        checkBox=(CheckBox)findViewById(R.id.checkBox);
+        if(client.Login(mEmailView.getText().toString(),mPasswordView.getText().toString())) {
+            if (checkBox.isChecked()) {
+                Intent intent = new Intent(LoginActivity.this, SelectItemActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+            finish();
+        } else {
+            Toast.makeText(getBaseContext(),"fail to login! check your id or pw",Toast.LENGTH_SHORT);
+        }
      /*   if (mAuthTask != null) {
             return;
         }

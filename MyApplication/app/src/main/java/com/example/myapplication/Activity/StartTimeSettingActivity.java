@@ -50,6 +50,7 @@ public class StartTimeSettingActivity extends AppCompatActivity {
                 SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date to = transFormat.parse(from);
                 */
+                Date start;
                 if(startTimeL.getVisibility()==View.GONE) {
                     startDateL.setVisibility(View.GONE);
                     startTimeL.setVisibility(View.VISIBLE);
@@ -60,7 +61,7 @@ public class StartTimeSettingActivity extends AppCompatActivity {
                     SimpleDateFormat transForm = new SimpleDateFormat(form);
                     Log.d("test","get arr time: "+form);
                     try {
-                        Date start = transForm.parse(form);
+                        start = transForm.parse(form);
                     } catch (ParseException e) {
                         Toast.makeText(getBaseContext(), "select day and time again", Toast.LENGTH_SHORT).show();
                         startTimeL.setVisibility(View.GONE);
@@ -70,7 +71,9 @@ public class StartTimeSettingActivity extends AppCompatActivity {
                     if (!isValidDate(startDatePicker.getYear(), startDatePicker.getMonth(), startDatePicker.getDayOfMonth()))
                         if (!isVaildTime()) return;
 
-                    Intent intent = new Intent(StartTimeSettingActivity.this, RequestActivity.class);
+                    Intent intent = getIntent();
+                    if(intent==null) intent=new Intent(StartTimeSettingActivity.this, RequestActivity.class);
+                    intent.putExtra("startD",start);
                     startActivity(intent);
                 }
             }

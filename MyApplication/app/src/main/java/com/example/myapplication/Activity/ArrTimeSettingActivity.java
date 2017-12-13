@@ -52,6 +52,7 @@ public class ArrTimeSettingActivity extends AppCompatActivity {
                 SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date to = transFormat.parse(from);
                 */
+                Date arr;
                 if (arrTimeL.getVisibility() == View.GONE) {
                     arrDateL.setVisibility(View.GONE);
                     arrTimeL.setVisibility(View.VISIBLE);
@@ -62,7 +63,7 @@ public class ArrTimeSettingActivity extends AppCompatActivity {
                     SimpleDateFormat transForm = new SimpleDateFormat(form);
                     Log.d("test", "get arr time: " + form);
                     try {
-                        Date arr = transForm.parse(form);
+                        arr = transForm.parse(form);
                     } catch (ParseException e) {
                         Toast.makeText(getBaseContext(), "select day and time again", Toast.LENGTH_SHORT).show();
                         arrTimeL.setVisibility(View.GONE);
@@ -71,7 +72,9 @@ public class ArrTimeSettingActivity extends AppCompatActivity {
                     }
                     if (!isValidDate(arrDatePicker.getYear(), arrDatePicker.getMonth(), arrDatePicker.getDayOfMonth()))
                         if (!isVaildTime()) return;
-                    Intent intent = new Intent(ArrTimeSettingActivity.this, RequestActivity.class);
+                    Intent intent = getIntent();
+                    if(intent==null) intent=new Intent(ArrTimeSettingActivity.this,RequestActivity.class);
+                    intent.putExtra("arrD",arr);
                     startActivity(intent);
                 }
             }
