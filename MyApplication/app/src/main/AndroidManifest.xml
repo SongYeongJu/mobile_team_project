@@ -14,9 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.MainActivity">
-
-        </activity>
+        <activity android:name=".Activity.MainActivity"></activity>
         <activity
             android:name=".Activity.LoginActivity"
             android:label="@string/title_activity_login">
@@ -26,13 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Activity.RequestActivity" />
         <activity android:name=".Activity.StartTimeSettingActivity" />
         <activity android:name=".Activity.ArrTimeSettingActivity" />
         <activity android:name=".Activity.DeliveryInfoActivity" />
         <activity android:name=".Activity.SelectItemActivity" />
-        <activity android:name=".Activity.DeliveryInfoActivity_forDM"></activity>
+        <activity android:name=".Activity.DeliveryInfoActivity_forDM" />
+        <activity android:name=".Activity.MainForDmActivity"></activity>
     </application>
 
 </manifest>

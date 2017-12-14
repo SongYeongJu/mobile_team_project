@@ -3,7 +3,6 @@ package com.example.myapplication.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,8 +12,6 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -28,6 +25,12 @@ public class ArrTimeSettingActivity extends AppCompatActivity {
     private LinearLayout arrTimeL;
 
     private Date arrTime;
+
+    private int year;
+    private int month;
+    private int day;
+    private int hour;
+    private int min;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,30 +55,34 @@ public class ArrTimeSettingActivity extends AppCompatActivity {
                 SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date to = transFormat.parse(from);
                 */
-                Date arr;
                 if (arrTimeL.getVisibility() == View.GONE) {
+                    year=arrDatePicker.getYear();
+                    month=arrDatePicker.getMonth();
+                    day=arrDatePicker.getDayOfMonth();
                     arrDateL.setVisibility(View.GONE);
                     arrTimeL.setVisibility(View.VISIBLE);
                 } else {
-
-                    String form = arrDatePicker.getYear() + "-" + arrDatePicker.getMonth() + "-" + arrDatePicker.getDayOfMonth();
-                    form += " " + arrTimePicker.getHour() + ":" + arrTimePicker.getMinute() + ":00";
-                    SimpleDateFormat transForm = new SimpleDateFormat(form);
-                    Log.d("test", "get arr time: " + form);
+                    hour=arrTimePicker.getHour();
+                    min=arrTimePicker.getMinute();
                     try {
-                        arr = transForm.parse(form);
-                    } catch (ParseException e) {
+                        arrTime=new Date(year,month,day,hour,min,0);
+                    } catch (Exception e) {
                         Toast.makeText(getBaseContext(), "select day and time again", Toast.LENGTH_SHORT).show();
                         arrTimeL.setVisibility(View.GONE);
                         arrDateL.setVisibility(View.VISIBLE);
                         return;
                     }
                     if (!isValidDate(arrDatePicker.getYear(), arrDatePicker.getMonth(), arrDatePicker.getDayOfMonth()))
-                        if (!isVaildTime()) return;
-                    Intent intent = getIntent();
-                    if(intent==null) intent=new Intent(ArrTimeSettingActivity.this,RequestActivity.class);
-                    intent.putExtra("arrD",arr);
-                    startActivity(intent);
+                        if (!isVaildTime()) {
+                            Toast.makeText(getBaseContext(), "select day and time again", Toast.LENGTH_SHORT).show();
+                            arrTimeL.setVisibility(View.GONE);
+                            arrDateL.setVisibility(View.VISIBLE);
+                            return;
+                        }
+                    Intent intent = new Intent(ArrTimeSettingActivity.this,RequestActivity.class);
+                    intent.putExtra("arrD",arrTime);
+                    setResult(2,intent);
+                    finish();
                 }
             }
         });

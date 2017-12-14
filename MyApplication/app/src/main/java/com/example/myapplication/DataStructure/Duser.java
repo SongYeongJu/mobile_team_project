@@ -48,4 +48,10 @@ public class Duser implements Serializable {
     public int getTrust() { return trust; }
     public Item getItem() { return item; }
 
+    public String returnInfo() {
+        String s;
+        String en="\n";
+        s="신뢰도 :"+ getTrust();
+        return s;
+    }
 }

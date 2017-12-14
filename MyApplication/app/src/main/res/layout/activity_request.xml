@@ -109,19 +109,19 @@
                 android:gravity="center"
                 android:text="물건 크기" />
 
-            <EditText
-
+            <TextView
                 android:id="@+id/ItemSizeText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="2"
                 android:background="@android:color/background_light"
                 android:gravity="center"
-                android:hint="가로, 세로, 높이의 크기를 입력해주세요"
+                android:hint="물건의 크기를 선택하여 주세요.\n가로,세로,높이 1m 이하 (소) 1m~2m(중) 2m~ (대)"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/holo_orange_dark"
-                android:textColorLink="@android:color/black" />
+                android:textColorLink="@android:color/black"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/textView13"

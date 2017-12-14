@@ -1,8 +1,8 @@
 package com.example.myapplication.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -27,6 +25,12 @@ public class StartTimeSettingActivity extends AppCompatActivity {
     private DatePicker startDatePicker;
     private TimePicker startTimePicker;
     private Date startTime;
+
+    private int year;
+    private int month;
+    private int day;
+    private int hour;
+    private int min;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,29 +56,38 @@ public class StartTimeSettingActivity extends AppCompatActivity {
                 */
                 Date start;
                 if(startTimeL.getVisibility()==View.GONE) {
+                    year=startDatePicker.getYear();
+                    month=startDatePicker.getMonth();
+                    day=startDatePicker.getDayOfMonth();
+
                     startDateL.setVisibility(View.GONE);
                     startTimeL.setVisibility(View.VISIBLE);
                 } else {
-
-                    String form = startDatePicker.getYear() + "-" + startDatePicker.getMonth() + "-" + startDatePicker.getDayOfMonth();
-                    form += " " + startTimePicker.getHour() + ":" + startTimePicker.getMinute() + ":00";
-                    SimpleDateFormat transForm = new SimpleDateFormat(form);
-                    Log.d("test","get arr time: "+form);
+                    hour=startTimePicker.getHour();
+                    min=startTimePicker.getMinute();
                     try {
-                        start = transForm.parse(form);
-                    } catch (ParseException e) {
+                        startTime=new Date(year,month,day,hour,min,0);
+
+                    } catch (Exception e) {
                         Toast.makeText(getBaseContext(), "select day and time again", Toast.LENGTH_SHORT).show();
                         startTimeL.setVisibility(View.GONE);
                         startDateL.setVisibility(View.VISIBLE);
                         return ;
                     }
                     if (!isValidDate(startDatePicker.getYear(), startDatePicker.getMonth(), startDatePicker.getDayOfMonth()))
-                        if (!isVaildTime()) return;
+                        if (!isVaildTime()) {
+                            Toast.makeText(getBaseContext(), "select day and time again", Toast.LENGTH_SHORT).show();
+                            startTimeL.setVisibility(View.GONE);
+                            startDateL.setVisibility(View.VISIBLE);
+                            return;
+                        }
 
-                    Intent intent = getIntent();
-                    if(intent==null) intent=new Intent(StartTimeSettingActivity.this, RequestActivity.class);
-                    intent.putExtra("startD",start);
-                    startActivity(intent);
+                    Intent intent = new Intent(StartTimeSettingActivity.this,RequestActivity.class);
+                    intent.putExtra("startD",startTime);
+                    Log.d("test","start time in Date:"+startTime.toString());
+                    setResult(1,intent);
+                    finish();
+                    //startActivity(intent);
                 }
             }
         });

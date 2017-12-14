@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         checkBox=(CheckBox)findViewById(R.id.checkBox);
         if(client.Login(mEmailView.getText().toString(),mPasswordView.getText().toString())) {
             if (checkBox.isChecked()) {
-                Intent intent = new Intent(LoginActivity.this, SelectItemActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainForDmActivity.class);
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
