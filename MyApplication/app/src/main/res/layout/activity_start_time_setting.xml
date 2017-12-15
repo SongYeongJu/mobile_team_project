@@ -15,22 +15,55 @@
         android:text="출발시간을 선택해주세요"
         android:textColor="@android:color/background_light" />
 
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:datePickerMode="spinner" />
-
-    <TimePicker
-        android:id="@+id/timePicker"
+    <LinearLayout
+        android:id="@+id/StartDayLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:timePickerMode="spinner" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="배달 가능 시작 날짜를 입력해주세요" />
+
+        <DatePicker
+            android:id="@+id/StartDatePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/StartTimeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="배달 가능 시작 시간을 입력해 주세요" />
+
+        <TimePicker
+            android:id="@+id/StartTimePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/go_to_info_start"
+        android:id="@+id/go_to_info_sta"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="선택" />
 </LinearLayout>
