@@ -103,7 +103,7 @@ public class Client {
     Refresh -> 배달원의 struc을 주는데 위치가 추가되니 item들에 위치 정보 추가*/
 
     public boolean Login(String id,String pw){
-        mSocket.emit("Login","id%pw");//customerLogin
+//        mSocket.emit("Login","id%pw");//customerLogin
 //        mSocket.on("LoginOK",)
         return true;
     }

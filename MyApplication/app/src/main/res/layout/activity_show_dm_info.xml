@@ -5,54 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.myapplication.Activity.DeliveryInfoActivity">
+    tools:context="com.example.myapplication.Activity.ShowDmInfoActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <TextView
+        android:id="@+id/textView2222"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:scaleType="centerInside"
-        app:srcCompat="@drawable/mapimage" />
+        android:gravity="center_vertical|center_horizontal"
+        android:text="매칭된 배송원 정보" />
 
     <TextView
-        android:id="@+id/delItemName"
+        android:id="@+id/mDuserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="1"
-        android:background="@android:color/holo_orange_light"
-        android:gravity="center"
-        android:text="배송품 이름" />
-
-    <TextView
-        android:id="@+id/delItemInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:text="배송품 정보" />
-
-    <TextView
-        android:id="@+id/delDuserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="@android:color/holo_orange_light"
         android:gravity="center"
         android:text="배달원 이름" />
 
     <TextView
-        android:id="@+id/delDuserInfo"
+        android:id="@+id/mDuserInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
-        android:layout_weight="2"
+        android:layout_weight="7"
         android:gravity="center"
         android:text="배달원 정보" />
 
@@ -72,16 +50,13 @@
             android:text="배달원에게 전화" />
 
         <Button
-            android:id="@+id/checkButton3"
+            android:id="@+id/checkButton2"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_weight="1"
-            android:text="배달 완료"
-            android:visibility="visible" />
-
+            android:text="물건 접수 완료" />
     </LinearLayout>
-
 
 </LinearLayout>

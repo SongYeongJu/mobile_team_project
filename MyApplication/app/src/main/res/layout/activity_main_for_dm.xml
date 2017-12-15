@@ -13,12 +13,6 @@
         android:text="배달 받기" />
 
     <Button
-        android:id="@+id/myDelItemButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="수락한 배달 정보 보기" />
-
-    <Button
         android:id="@+id/myMoneyButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

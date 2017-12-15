@@ -3,16 +3,15 @@ package resolution.ex6.vr.new_project;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
-
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 public class MainActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.OpenAPIKeyAuthenticationResultListener {
 
-    // private static MapPoint DEFAULT_MARKER_POINT= MapPoint.mapPointWithGeoCoord(35.8, 128.6);;
+    private static MapPoint DEFAULT_MARKER_POINT= MapPoint.mapPointWithGeoCoord(35.8, 128.6);;
     private MapView mapView;
-    private MapPOIItem mDefaultMarker;
+    MarkerActivity Marker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
         mapView.setMapViewEventListener(this); //지도 이동/확대/축소, 지도 화면 터치 이벤트 통보
         mapView.setPOIItemEventListener(this); //POI 관련 이벤트를 통보받을 수 있음
         onMapViewInitialized(mapView);
-//        createDefaultMarker(mapView, DEFAULT_MARKER_POINT);
+        onMapViewCenterPointMoved(mapView, DEFAULT_MARKER_POINT);
+        Marker.createDefaultMarker(mapView, DEFAULT_MARKER_POINT);
 
 
     }
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
         MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
         MapPoint.PlainCoordinate mapPointScreenLocation = mapPoint.getMapPointScreenLocation();
         MapPoint sMapPoint = MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
-        createDefaultMarker(mapView, sMapPoint);
+        Marker.createDefaultMarker(mapView, sMapPoint);
     }
 
     @Override
@@ -101,20 +101,6 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
     @Override
     public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
 
-    }
-
-    private void createDefaultMarker(MapView mapView, MapPoint mapPoint) {
-        mDefaultMarker = new MapPOIItem();
-        String name = "클릭한 위치";
-        mDefaultMarker.setItemName(name);
-        mDefaultMarker.setTag(0);
-        mDefaultMarker.setMapPoint(mapPoint);
-        mDefaultMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
-        mDefaultMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-
-        mapView.addPOIItem(mDefaultMarker);
-        mapView.selectPOIItem(mDefaultMarker, true);
-//        mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, false);
     }
 
     @Override
