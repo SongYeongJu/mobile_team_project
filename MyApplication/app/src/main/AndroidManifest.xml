@@ -36,4 +36,9 @@
         <activity android:name=".Activity.MoneyForDmActivity"></activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <meta-data android:name="com.kakao.sdk.AppKey" android:value="068723c9e6c0fefc94eba78aedd1dc58"/>
+
 </manifest>

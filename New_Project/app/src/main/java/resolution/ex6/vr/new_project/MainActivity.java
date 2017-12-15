@@ -10,7 +10,7 @@ import net.daum.mf.map.api.MapView;
 
 public class MainActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.OpenAPIKeyAuthenticationResultListener {
 
-    private static final MapPoint DEFAULT_MARKER_POINT=MapPoint.mapPointWithGeoCoord(35.87222, 128.60250);
+    // private static MapPoint DEFAULT_MARKER_POINT= MapPoint.mapPointWithGeoCoord(35.8, 128.6);;
     private MapView mapView;
     private MapPOIItem mDefaultMarker;
 
@@ -19,17 +19,20 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mapView=new MapView(this);
+        mapView = new MapView(this);
 
-        ViewGroup mapViewContainer=(ViewGroup)findViewById(R.id.map_view);
+        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapView.setDaumMapApiKey("835f22aa08fe27fbfc4a54e32130b674");
         mapViewContainer.addView(mapView);
-//        mapView.setMapViewEventListener(this); //지도 이동/확대/축소, 지도 화면 터치 이벤트 통보
-//        mapView.setPOIItemEventListener(this); //POI 관련 이벤트를 통보받을 수 있음
-//        onMapViewInitialized(mapView);
+
+        mapView.setMapViewEventListener(this); //지도 이동/확대/축소, 지도 화면 터치 이벤트 통보
+        mapView.setPOIItemEventListener(this); //POI 관련 이벤트를 통보받을 수 있음
+        onMapViewInitialized(mapView);
 //        createDefaultMarker(mapView, DEFAULT_MARKER_POINT);
 
+
     }
+
     //MapViewEventListener
     @Override
     public void onMapViewInitialized(MapView mapView) {
@@ -48,9 +51,9 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
     @Override
     public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo=mapPoint.getMapPointGeoCoord();
-        MapPoint.PlainCoordinate mapPointScreenLocation=mapPoint.getMapPointScreenLocation();
-        MapPoint sMapPoint=MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
+        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
+        MapPoint.PlainCoordinate mapPointScreenLocation = mapPoint.getMapPointScreenLocation();
+        MapPoint sMapPoint = MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
         createDefaultMarker(mapView, sMapPoint);
     }
 

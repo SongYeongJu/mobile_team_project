@@ -9,6 +9,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -29,6 +30,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('C:/Users/Public/mobile_team_project/New_Project/app/libs/libDaumMapAndroid.jar')
     compile files('C:/Users/Public/mobile_team_project/New_Project/app/libs/libDaumMapEngineApi.jar')
+
 }
 
 android{
@@ -36,7 +38,7 @@ android{
         abi{
             enable true
             reset()
-            include 'x86', 'armeabi-v7a'
+            include 'x86', 'armeabi', 'armeabi-v7a'
             universalApk true
         }
     }
