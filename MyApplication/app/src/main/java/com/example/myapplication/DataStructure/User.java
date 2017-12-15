@@ -11,21 +11,35 @@ import java.io.Serializable;
 ----------------------db
 */
 public class User implements Serializable {
+    private String id;
+    private String pw;
+
     private String name;
+    private String phone;
     private int money;
     private Item item;
 
+    public static User returnSample(){ return new User("","","sample","010-3834-0371",1000,null);}
     public User(){}
-    public User(String name,int money,Item item){
+    public User(String id,String pw,String name,String phone,int money,Item item){
+        setId(id);
+        setPw(pw);
         setName(name);
+        setPhone(phone);
         setMoney(money);
         setItem(item);
     }
 
+    public void setPhone(String phone){ this.phone=phone; }
+    public void setId(String id) { this.id = id; }
+    public void setPw(String pw) { this.pw = pw; }
     public void setName(String name) {this.name = name;}
     public void setMoney(int money) {this.money = money;}
     public void setItem(Item item) {this.item = item;}
 
+    public String getPhone(){ return phone; }
+    public String getId() { return id; }
+    public String getPw() { return pw; }
     public String getName() {return name;}
     public int getMoney() {return money;}
     public Item getItem() {return item;}

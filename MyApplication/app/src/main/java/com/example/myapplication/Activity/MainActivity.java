@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         go_to_money.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,MoneyActivity.class);
+                startActivity(intent);
             }
         });
     }

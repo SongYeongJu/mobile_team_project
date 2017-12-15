@@ -19,18 +19,18 @@ public class Item implements Serializable {
     private Date st;
     private Location sta;
     private Date dt;
-    private boolean order;
+    private int order; // 1 요청      2 매칭 완료    3 인수 완료     4 배달 완료    5 배달 완료 확인
     private String request;
 
 
     public static Item returnSempleItem() {
-        return new Item("sample", 1, "상", 0, 0, new Date(), 0, 0, new Date(), null, false);
+        return new Item("sample", 1, "상", 0, 0, new Date(), 0, 0, new Date(), null,1);
     }
 
     public Item() {
     }
 
-    public Item(String name, int weight, String size, int dx, int dy, Date dt, int sx, int sy, Date st, String request, boolean order) {
+    public Item(String name, int weight, String size, int dx, int dy, Date dt, int sx, int sy, Date st, String request,int order) {
         setName(name);
         setWeight(weight);
         setSize(size);
@@ -42,7 +42,7 @@ public class Item implements Serializable {
         setOrder(order);
     }
 
-    public Item(String name, int weight, String size, Location ld, Date dt, Location ls, Date st, String request, boolean order) {
+    public Item(String name, int weight, String size, Location ld, Date dt, Location ls, Date st, String request, int order) {
         setName(name);
         setWeight(weight);
         setSize(size);
@@ -84,7 +84,7 @@ public class Item implements Serializable {
         this.dt = dt;
     }
 
-    public void setOrder(boolean order) {
+    public void setOrder(int order) {
         this.order = order;
     }
 
@@ -118,7 +118,7 @@ public class Item implements Serializable {
 
     public String getSize() { return size; }
 
-    public boolean isOrder() {
+    public int isOrder() {
         return order;
     }
 
