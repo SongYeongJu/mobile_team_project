@@ -2,35 +2,43 @@ package resolution.ex6.vr.new_project;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.ViewGroup;
+
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-public class MainActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.OpenAPIKeyAuthenticationResultListener {
+public class MainActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.CurrentLocationEventListener {
 
-    private static MapPoint DEFAULT_MARKER_POINT= MapPoint.mapPointWithGeoCoord(35.8, 128.6);;
-    private MapView mapView;
-    MarkerActivity Marker;
+    public static final MapPoint DEFAULT_MARKER_POINT=MapPoint.mapPointWithGeoCoord(35.87222, 128.60250);
+    public MapView mapView;
+    MarkerActivity setMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mapView = new MapView(this);
+        mapView=new MapView(this);
 
-        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
-        mapView.setDaumMapApiKey("835f22aa08fe27fbfc4a54e32130b674");
+        ViewGroup mapViewContainer=(ViewGroup)findViewById(R.id.map_view);
+        mapView.setDaumMapApiKey("9cd21f655ed0bbade4257691ce87f6ce");
         mapViewContainer.addView(mapView);
-
         mapView.setMapViewEventListener(this); //지도 이동/확대/축소, 지도 화면 터치 이벤트 통보
-        mapView.setPOIItemEventListener(this); //POI 관련 이벤트를 통보받을 수 있음
-        onMapViewInitialized(mapView);
-        onMapViewCenterPointMoved(mapView, DEFAULT_MARKER_POINT);
-        Marker.createDefaultMarker(mapView, DEFAULT_MARKER_POINT);
+        mapView.setCurrentLocationEventListener(this);
 
+        Log.i("되는가", "응");
+//        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+//        onMapViewDoubleTapped(mapView, DEFAULT_MARKER_POINT);
+        MapPOIItem marker=new MapPOIItem();
+        marker.setItemName("출발 위치");
+        marker.setTag(0);
+        marker.setMapPoint(DEFAULT_MARKER_POINT);
+        marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
 
+        mapView.addPOIItem(marker);
     }
 
     //MapViewEventListener
@@ -51,15 +59,18 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
     @Override
     public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
-        MapPoint.PlainCoordinate mapPointScreenLocation = mapPoint.getMapPointScreenLocation();
-        MapPoint sMapPoint = MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
-        Marker.createDefaultMarker(mapView, sMapPoint);
+        MapPoint.GeoCoordinate mapPointGeo=mapPoint.getMapPointGeoCoord();
+        MapPoint.PlainCoordinate mapPointScreenLocation=mapPoint.getMapPointScreenLocation();
+        MapPoint sMapPoint=MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
+//        setMarker.createStartMarker(mapView, sMapPoint);
     }
 
     @Override
     public void onMapViewDoubleTapped(MapView mapView, MapPoint mapPoint) {
-
+        MapPoint.GeoCoordinate mapPointGeo=mapPoint.getMapPointGeoCoord();
+        MapPoint.PlainCoordinate mapPointScreenLocation=mapPoint.getMapPointScreenLocation();
+        MapPoint sMapPoint=MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
+//        setMarker.createDestinationMarker(mapView, sMapPoint);
     }
 
     @Override
@@ -82,29 +93,24 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
     }
 
-    //POIItemEventListener
     @Override
-    public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+    public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
 
     }
 
     @Override
-    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+    public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
 
     }
 
     @Override
-    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+    public void onCurrentLocationUpdateFailed(MapView mapView) {
 
     }
 
     @Override
-    public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+    public void onCurrentLocationUpdateCancelled(MapView mapView) {
 
     }
 
-    @Override
-    public void onDaumMapOpenAPIKeyAuthenticationResult(MapView mapView, int i, String s) {
-
-    }
 }

@@ -21,7 +21,7 @@ public class Item implements Serializable {
     private Date dt;
     private int order; // 1 요청      2 매칭 완료    3 인수 완료     4 배달 완료    5 배달 완료 확인
     private String request;
-
+    private int money;
 
     public static Item returnSempleItem() {
         return new Item("sample", 1, "상", 0, 0, new Date(), 0, 0, new Date(), null,1);
@@ -40,6 +40,7 @@ public class Item implements Serializable {
         setSt(st);
         setRequest(request);
         setOrder(order);
+        setMoney();
     }
 
     public Item(String name, int weight, String size, Location ld, Date dt, Location ls, Date st, String request, int order) {
@@ -52,6 +53,16 @@ public class Item implements Serializable {
         setSt(st);
         setRequest(request);
         setOrder(order);
+        setMoney();
+    }
+
+    public void setMoney(){
+        int m=0;
+        if(size.equals("상")) m+=300;
+        if(size.equals("중")) m+=200;
+        if(size.equals("하")) m+=100;
+
+        money=m;
     }
 
     public void setSta(int x, int y) { this.sta = new Location(x, y); }
@@ -117,6 +128,8 @@ public class Item implements Serializable {
     }
 
     public String getSize() { return size; }
+
+    public int getMoney() { return money; }
 
     public int isOrder() {
         return order;
