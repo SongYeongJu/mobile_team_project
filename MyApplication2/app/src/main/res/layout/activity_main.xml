@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.myapplication.Activity.MainActivity">
+
+    <Button
+        android:id="@+id/go_to_requ_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="배송 요청하기" />
+
+    <Button
+        android:id="@+id/go_to_info_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="배송 추적하기" />
+
+    <Button
+        android:id="@+id/go_to_money_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="입금하기" />
+</LinearLayout>
