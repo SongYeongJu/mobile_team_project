@@ -1,19 +1,14 @@
 package resolution.ex6.vr.new_project;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import net.daum.mf.map.api.CalloutBalloonAdapter;
-import net.daum.mf.map.api.CameraUpdateFactory;
+
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapPointBounds;
 import net.daum.mf.map.api.MapView;
 
-public class MainActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener{
+public class MainActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.OpenAPIKeyAuthenticationResultListener {
 
     private static final MapPoint DEFAULT_MARKER_POINT=MapPoint.mapPointWithGeoCoord(35.87222, 128.60250);
     private MapView mapView;
@@ -27,11 +22,12 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
         mapView=new MapView(this);
 
         ViewGroup mapViewContainer=(ViewGroup)findViewById(R.id.map_view);
-        mapView.setDaumMapApiKey("068723c9e6c0fefc94eba78aedd1dc58");
+        mapView.setDaumMapApiKey("835f22aa08fe27fbfc4a54e32130b674");
         mapViewContainer.addView(mapView);
-        mapView.setMapViewEventListener(this); //지도 이동/확대/축소, 지도 화면 터치 이벤트 통보
-        mapView.setPOIItemEventListener(this); //POI 관련 이벤트를 통보받을 수 있음
-        createDefaultMarker(mapView, DEFAULT_MARKER_POINT);
+//        mapView.setMapViewEventListener(this); //지도 이동/확대/축소, 지도 화면 터치 이벤트 통보
+//        mapView.setPOIItemEventListener(this); //POI 관련 이벤트를 통보받을 수 있음
+//        onMapViewInitialized(mapView);
+//        createDefaultMarker(mapView, DEFAULT_MARKER_POINT);
 
     }
     //MapViewEventListener
@@ -113,10 +109,13 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
         mDefaultMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
         mDefaultMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
 
-        mDefaultMarker.ShowAnimationType DropFromHeaven;
         mapView.addPOIItem(mDefaultMarker);
         mapView.selectPOIItem(mDefaultMarker, true);
 //        mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, false);
     }
 
+    @Override
+    public void onDaumMapOpenAPIKeyAuthenticationResult(MapView mapView, int i, String s) {
+
+    }
 }
