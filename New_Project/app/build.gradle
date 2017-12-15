@@ -9,6 +9,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -27,8 +28,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    compile files('C:/Users/mina/Desktop/New_Project/app/libs/libDaumMapAndroid.jar')
-    compile files('C:/Users/mina/Desktop/New_Project/app/libs/libDaumMapEngineApi.jar')
+    compile files('C:/Users/mina/Desktop/MobileApp/mobile_team_project/libs/libDaumMapAndroid.jar')
+    compile files('C:/Users/mina/Desktop/MobileApp/mobile_team_project/libs/libDaumMapEngineApi.jar')
 }
 
 android{
@@ -36,7 +37,7 @@ android{
         abi{
             enable true
             reset()
-            include 'x86', 'armeabi-v7a'
+            include 'x86', 'armeabi', 'armeabi-v7a'
             universalApk true
         }
     }

@@ -15,7 +15,7 @@ import net.daum.mf.map.api.MapView;
 
 public class MainActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener{
 
-    private static final MapPoint DEFAULT_MARKER_POINT=MapPoint.mapPointWithGeoCoord(35.87222, 128.60250);
+   // private static MapPoint DEFAULT_MARKER_POINT= MapPoint.mapPointWithGeoCoord(35.8, 128.6);;
     private MapView mapView;
     private MapPOIItem mDefaultMarker;
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
         mapViewContainer.addView(mapView);
         mapView.setMapViewEventListener(this); //지도 이동/확대/축소, 지도 화면 터치 이벤트 통보
         mapView.setPOIItemEventListener(this); //POI 관련 이벤트를 통보받을 수 있음
-        createDefaultMarker(mapView, DEFAULT_MARKER_POINT);
+     //   createDefaultMarker(mapView, DEFAULT_MARKER_POINT);
 
     }
     //MapViewEventListener
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
         mDefaultMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
         mDefaultMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
 
-        mDefaultMarker.ShowAnimationType DropFromHeaven;
+//        mDefaultMarker.ShowAnimationType DropFromHeaven;
         mapView.addPOIItem(mDefaultMarker);
         mapView.selectPOIItem(mDefaultMarker, true);
 //        mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, false);
