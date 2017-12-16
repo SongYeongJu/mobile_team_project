@@ -26,7 +26,7 @@ public class MoneyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_money);
 
         client=Client.getInstance();
-        user=User.returnSample();
+        user=client.getCustomer();
 
         moneyText=(TextView)findViewById(R.id.myMoneyTextView);
         moneyText.setText(user.getMoney()+"원");

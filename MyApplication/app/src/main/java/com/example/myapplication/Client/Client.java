@@ -102,7 +102,7 @@ public class Client {
 
         Log.d("test", "client login start");
         isDuser = IsDuser;
-        this.id=id;
+        this.id = id;
         if (IsDuser) { //딜리버리맨 로그인
             final JSONObject jsonRecvData = new JSONObject();
             JSONObject jsonLogin = new JSONObject();
@@ -395,15 +395,11 @@ public class Client {
         return login;
     }
 
-    public int Deposit(int cost){
+    public int Deposit(int cost) {
         JSONObject jsonCost = new JSONObject();
         try {
-            jsonCost.put("id",id);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            jsonCost.put("cost",cost);
+            jsonCost.put("id", id);
+            jsonCost.put("cost", cost);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -411,9 +407,10 @@ public class Client {
         Emitter.Listener depositMoney = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                JSONArray arg=(JSONArray)args[0];
+                JSONArray arg = (JSONArray) args[0];
                 try {
-                    sum=arg.getJSONObject(0).getInt("sum");
+                    Log.d("test","deposit args"+args[0].toString());
+                    sum = arg.getJSONObject(0).getInt("sum");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -422,9 +419,10 @@ public class Client {
             }
         };
         mSocket.on("customerDeposit", depositMoney);
-        while(wait);
+        while (wait) ;
         return sum;
     }
+
     public void Dinfo() {
 
     }
@@ -444,64 +442,103 @@ public class Client {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mSocket.emit("requestDelivery",jsonItem);
+        mSocket.emit("requestDelivery", jsonItem);
     }
-    public void AcceptDelivery(Item item){
+
+    public void AcceptDelivery(Item item) {
         JSONObject jsonItemInfo = new JSONObject();
         try {
             jsonItemInfo.put("deliveryman_id", id);//deliveryman id
             jsonItemInfo.put("delivery_id", item.getName());//item 이름
-        }catch (Exception e) {}
-        mSocket.emit("acceptDelivery",jsonItemInfo);
+        } catch (Exception e) {
+        }
+        mSocket.emit("acceptDelivery", jsonItemInfo);
     }
-    public void upDateLocation(double x,double y){
+
+    public void upDateLocation(double x, double y) {
         JSONObject jsonLocation = new JSONObject();
         try {
             jsonLocation.put("x", x);
             jsonLocation.put("y", y);
             jsonLocation.put("id", id);//delivery user id
-        }catch (Exception e) {}
+        } catch (Exception e) {
+        }
         mSocket.emit("updateLocation", jsonLocation);
     }
-    public Location getDmLocation(){
+
+    public Location getDmLocation() {
         final JSONObject jsonDLocation = new JSONObject();
         JSONObject jsonID = new JSONObject();
-        wait=true;
+        wait = true;
         try {
-            jsonID.put("id",id);
+            jsonID.put("id", id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mSocket.emit("requestDeliverymanLocation",jsonID);
+        mSocket.emit("requestDeliverymanLocation", jsonID);
         mSocket.on("requestDeliverymanLocation", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                JSONArray argv=(JSONArray)args[0];
-                double locationX=0;
-                double locationY=0;
+                JSONArray argv = (JSONArray) args[0];
+                double locationX = 0;
+                double locationY = 0;
                 try {
-                    locationX=argv.getJSONObject(0).getDouble("x");
-                    locationY=argv.getJSONObject(0).getDouble("y");
+                    locationX = argv.getJSONObject(0).getDouble("x");
+                    locationY = argv.getJSONObject(0).getDouble("y");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if(duser!=null) {
-                    duser.setLocation(new Location(locationX,locationY));
-                    wait=false;
+                if (duser != null) {
+                    duser.setLocation(new Location(locationX, locationY));
+                    wait = false;
                 } else {
-                    duser=new Duser(); duser.setLocation(new Location(locationX,locationY));
-                    wait=false;
+                    duser = new Duser();
+                    duser.setLocation(new Location(locationX, locationY));
+                    wait = false;
                 }
             }
         });
-        while(wait);
+        while (wait) ;
         return duser.getLocation();
     }
 
-    public void startDelivery(){
+    public User getCustomer() {
+        JSONObject jsonID4 = new JSONObject();
+        try {
+            jsonID4.put("id", id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("test","getCustomer + id:"+id);
+        wait=true;
+        mSocket.emit("getCustomer", jsonID4);//배달원 id
+        mSocket.on("getCustomer", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                JSONArray arg = (JSONArray) args[0];
+                Log.d("test","getCustomer args+ "+args[0].toString());
+                //public User(String id,String pw,String name,String phone,int money,Item item){
+                try {
+                    user = new User(arg.getJSONObject(0).getString("id"), arg.getJSONObject(0).getString("password"), arg.getJSONObject(0).getString("name"), arg.getJSONObject(0).getString("phone"), arg.getJSONObject(0).getInt("money"), null);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(user==null) {
+                    Log.d("test","getCustomer user==null");
+                } else{
+                    Log.d("test","getCustomer user!=null");
+                }
+                wait=false;
+            }
+        });
+        while(wait);
+        return user;
+    }
+
+    public void startDelivery() {
         JSONObject jsonID1 = new JSONObject();
         try {
-            jsonID1.put("id",id);
+            jsonID1.put("id", id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -511,16 +548,17 @@ public class Client {
     public void RequestComp() {
         JSONObject jsonID2 = new JSONObject();
         try {
-            jsonID2.put("id",id);
+            jsonID2.put("id", id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         mSocket.emit("requestComp", jsonID2);//배달원 id
     }
+
     public void AcceptComp() {
         JSONObject jsonID3 = new JSONObject();
         try {
-            jsonID3.put("id",id);
+            jsonID3.put("id", id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
