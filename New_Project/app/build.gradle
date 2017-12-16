@@ -27,8 +27,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    compile files('C:/Users/mina/Desktop/New_Project/app/libs/libDaumMapAndroid.jar')
-    compile files('C:/Users/mina/Desktop/New_Project/app/libs/libDaumMapEngineApi.jar')
+    compile files('C:/1/New_Project/app/libs/libDaumMapAndroid.jar')
+    compile files('C:/1/New_Project/app/libs/libDaumMapEngineApi.jar')
 }
 
 android{
