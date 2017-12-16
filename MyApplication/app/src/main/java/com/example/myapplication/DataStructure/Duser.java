@@ -11,37 +11,53 @@ import java.io.Serializable;
 ----------------------db
 */
 public class Duser implements Serializable {
+    private String id;
+    private String pw;
 
     private String name;
     private int money;
+    private String phone;
     private int trust;
     private Location location;
     private Item item;
 
+    public static Duser returnSample(){ return  new Duser("","","sample","010-3834-0371",3000,0,0,0,null); }
     public Duser(){}
-    public Duser(String name,int money,int trust,int x,int y,Item item) {
+    public Duser(String id,String pw,String name,String phone,int money,int trust,double x,double y,Item item) {
+        setId(id);
+        setPw(pw);
         setName(name);
+        setPhone(phone);
         setMoney(money);
         setItem(item);
         setLocation(x,y);
         setItem(item);
     }
 
-    public Duser(String name,int money,int trust,Location location,Item item) {
+    public Duser(String id,String pw,String name,String phone,int money,int trust,Location location,Item item) {
+        setId(id);
+        setPw(pw);
         setName(name);
+        setPhone(phone);
         setMoney(money);
         setItem(item);
         setLocation(location);
         setItem(item);
     }
 
+    public void setPhone(String phone){ this.phone=phone; }
+    public void setId(String id) { this.id = id; }
+    public void setPw(String pw) { this.pw = pw; }
     public void setMoney(int money) { this.money = money; }
     public void setTrust(int trust) { this.trust = trust; }
     public void setItem(Item item) { this.item = item; }
     public void setName(String name) { this.name = name; }
     public void setLocation(Location location) { this.location = location; }
-    public void setLocation(int x,int y) { location=new Location(x,y); }
+    public void setLocation(double x,double y) { location=new Location(x,y); }
 
+    public String getPhone() { return phone; }
+    public String getId() { return id; }
+    public String getPw() { return pw; }
     public Location getLocation() { return location; }
     public String getName() { return name; }
     public int getMoney() { return money; }

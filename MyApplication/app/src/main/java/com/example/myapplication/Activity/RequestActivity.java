@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class RequestActivity extends AppCompatActivity {
+public class RequestActivity extends AppCompatActivity{
 
     private Client client;
 
@@ -150,7 +150,7 @@ public class RequestActivity extends AppCompatActivity {
         TextView requT = (TextView) findViewById(R.id.RequestedText);
         String requ = requT.getText().toString();
         //public Item(String name,int weight,String size,int dx,int dy,Date dt,int sx,int sy,Date st,boolean order)
-        item = new Item(name, weight, size, arrL, arrD, startL, startD, requ, false);
+        item = new Item(name, weight, size, arrL, arrD, startL, startD, requ, 1);
         client.Uitem(item);
 
         Intent intent = new Intent(RequestActivity.this, DeliveryInfoActivity.class);

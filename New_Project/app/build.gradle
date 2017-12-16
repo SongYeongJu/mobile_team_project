@@ -27,8 +27,14 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+<<<<<<< HEAD
     compile files('C:/1/New_Project/app/libs/libDaumMapAndroid.jar')
     compile files('C:/1/New_Project/app/libs/libDaumMapEngineApi.jar')
+=======
+    compile files('C:/Users/Public/mobile_team_project/New_Project/app/libs/libDaumMapAndroid.jar')
+    compile files('C:/Users/Public/mobile_team_project/New_Project/app/libs/libDaumMapEngineApi.jar')
+
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
 }
 
 android{
@@ -36,7 +42,7 @@ android{
         abi{
             enable true
             reset()
-            include 'x86', 'armeabi-v7a'
+            include 'x86', 'armeabi', 'armeabi-v7a'
             universalApk true
         }
     }

@@ -14,14 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button go_to_info=findViewById(R.id.go_to_info_main);
-        go_to_info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,DeliveryInfoActivity.class);
-                startActivity(intent);
-            }
-        });
+
         Button go_to_requ=findViewById(R.id.go_to_requ_main);
         go_to_requ.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         go_to_money.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,MoneyActivity.class);
+                startActivity(intent);
             }
         });
     }

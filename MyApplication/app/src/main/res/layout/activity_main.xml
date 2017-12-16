@@ -14,12 +14,6 @@
         android:text="배송 요청하기" />
 
     <Button
-        android:id="@+id/go_to_info_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="배송 추적하기" />
-
-    <Button
         android:id="@+id/go_to_money_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

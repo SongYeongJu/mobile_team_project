@@ -6,6 +6,12 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <meta-data
+        android:name="com.kakao.sdk.AppKey"
+        android:value="068723c9e6c0fefc94eba78aedd1dc58" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.MainActivity"></activity>
+        <activity android:name=".Activity.MainActivity" />
         <activity
             android:name=".Activity.LoginActivity"
             android:label="@string/title_activity_login">
@@ -30,7 +36,13 @@
         <activity android:name=".Activity.DeliveryInfoActivity" />
         <activity android:name=".Activity.SelectItemActivity" />
         <activity android:name=".Activity.DeliveryInfoActivity_forDM" />
-        <activity android:name=".Activity.MainForDmActivity"></activity>
+        <activity android:name=".Activity.MainForDmActivity" />
+        <activity android:name=".Activity.MoneyActivity" />
+        <activity android:name=".Activity.MoneyForDmActivity" />
+        <activity android:name=".Activity.ShowDmInfoActivity" />
+        <activity android:name=".Activity.ShowItemInfoActivity" />
+        <activity android:name=".Activity.ShowStartPointActivity" />
+        <activity android:name=".Activity.WaitForRewardActivity"></activity>
     </application>
 
 </manifest>

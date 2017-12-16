@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.myapplication.Activity.ShowDmInfoActivity">
+
+    <TextView
+        android:id="@+id/textView2222"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="매칭된 배송원 정보" />
+
+    <TextView
+        android:id="@+id/mDuserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_orange_light"
+        android:gravity="center"
+        android:text="배달원 이름" />
+
+    <TextView
+        android:id="@+id/mDuserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_weight="7"
+        android:gravity="center"
+        android:text="배달원 정보" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/checkButton1"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_weight="1"
+            android:text="배달원에게 전화" />
+
+        <Button
+            android:id="@+id/checkButton2"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_weight="1"
+            android:text="물건 접수 완료" />
+    </LinearLayout>
+
+</LinearLayout>

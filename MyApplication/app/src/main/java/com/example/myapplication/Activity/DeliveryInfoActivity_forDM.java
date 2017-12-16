@@ -6,10 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myapplication.Client.Client;
 import com.example.myapplication.DataStructure.Item;
@@ -29,58 +27,55 @@ public class DeliveryInfoActivity_forDM extends AppCompatActivity {
     private TextView ItemInfoTextView;
 
     private ProgressBar progressBar;
-    private EditText getCompCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_info_for_dm);
 
-        client=Client.getInstance();
+        client = Client.getInstance();
 
-        arrTimeTextView=(TextView)findViewById(R.id.dmArrTime);
-        ItemNameTextView=(TextView)findViewById(R.id.dmItemName);
-        ItemInfoTextView=(TextView)findViewById(R.id.dmItemInfo);
-        progressBar=(ProgressBar)findViewById(R.id.dmProgressBar);
-        getCompCode=(EditText)findViewById(R.id.getCompCode);
+        arrTimeTextView = (TextView) findViewById(R.id.dmArrTime);
+        ItemNameTextView = (TextView) findViewById(R.id.dmItemName);
+        ItemInfoTextView = (TextView) findViewById(R.id.dmItemInfo);
+        progressBar = (ProgressBar) findViewById(R.id.dmProgressBar);
 
         setText();
 
-        Button completeButton=findViewById(R.id.CompleteButton) ;
+        Button completeButton = findViewById(R.id.CompleteButton);
         completeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getCompCode.getText().toString().length()>0) {
-                    //완료 코드가 맞는지 확인
-                    Log.d("test","getCompCode:"+getCompCode.getText().toString());
-                    Intent intent = new Intent(DeliveryInfoActivity_forDM.this, SelectItemActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else Toast.makeText(getBaseContext(),"완료 코드를 다시 확인해 주세요",Toast.LENGTH_SHORT).show();
+                client.RequestComp();
+                Intent intent = new Intent(DeliveryInfoActivity_forDM.this, WaitForRewardActivity.class);
+                startActivity(intent);
+                finish();
+
             }
         });
     }
 
 
-    void setPB(){
-        long total=item.getDt().getTime()-item.getSt().getTime();
-        Date nd=new Date();
-        long now=item.getDt().getTime()-nd.getTime();
-        int percent=(int)((now/total)*100);
+    void setPB() {
+        long total = item.getDt().getTime() - item.getSt().getTime();
+        Date nd = new Date();
+        long now = item.getDt().getTime() - nd.getTime();
+        int percent = (int) ((now / total) * 100);
         progressBar.setProgress(percent);
-        Log.d("test","progress : "+ percent);
+        Log.d("test", "progress : " + percent);
     }
 
-    void setText(){
-        if(item==null) item=Item.returnSempleItem();
+    void setText() {
+        if (item == null) item = Item.returnSempleItem();
         else setPB();
 
-        SimpleDateFormat formatter = new SimpleDateFormat ( "HH:mm:ss", Locale.KOREA );
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss", Locale.KOREA);
         Date currentTime = item.getSt();
 
-        arrTimeTextView.setText(formatter.format ( currentTime ));
+        arrTimeTextView.setText(formatter.format(currentTime));
         ItemNameTextView.setText(item.getName());
         ItemInfoTextView.setText(item.returnInfo());
-        if(item.getName()==Item.returnSempleItem().getName() && item.getSta().getX()==0) item=null;
+        if (item.getName() == Item.returnSempleItem().getName() && item.getSta().getX() == 0)
+            item = null;
     }
 }

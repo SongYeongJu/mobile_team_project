@@ -19,18 +19,18 @@ public class Item implements Serializable {
     private Date st;
     private Location sta;
     private Date dt;
-    private boolean order;
+    private int order; // 1 요청      2 매칭 완료    3 인수 완료     4 배달 완료    5 배달 완료 확인
     private String request;
-
+    private int money;
 
     public static Item returnSempleItem() {
-        return new Item("sample", 1, "상", 0, 0, new Date(), 0, 0, new Date(), null, false);
+        return new Item("sample", 1, "상", 0, 0, new Date(), 0, 0, new Date(), null,1);
     }
 
     public Item() {
     }
 
-    public Item(String name, int weight, String size, int dx, int dy, Date dt, int sx, int sy, Date st, String request, boolean order) {
+    public Item(String name, int weight, String size, double dx, double dy, Date dt, double sx, double sy, Date st, String request,int order) {
         setName(name);
         setWeight(weight);
         setSize(size);
@@ -40,9 +40,10 @@ public class Item implements Serializable {
         setSt(st);
         setRequest(request);
         setOrder(order);
+        setMoney();
     }
 
-    public Item(String name, int weight, String size, Location ld, Date dt, Location ls, Date st, String request, boolean order) {
+    public Item(String name, int weight, String size, Location ld, Date dt, Location ls, Date st, String request, int order) {
         setName(name);
         setWeight(weight);
         setSize(size);
@@ -52,11 +53,21 @@ public class Item implements Serializable {
         setSt(st);
         setRequest(request);
         setOrder(order);
+        setMoney();
     }
 
-    public void setSta(int x, int y) { this.sta = new Location(x, y); }
+    public void setMoney(){
+        int m=0;
+        if(size.equals("상")) m+=300;
+        if(size.equals("중")) m+=200;
+        if(size.equals("하")) m+=100;
 
-    public void setDes(int x, int y) { this.des = new Location(x, y); }
+        money=m;
+    }
+
+    public void setSta(double x, double y) { this.sta = new Location(x, y); }
+
+    public void setDes(double x,double y) { this.des = new Location(x, y); }
 
     public void setSize(String size) { this.size = size; }
 
@@ -84,7 +95,7 @@ public class Item implements Serializable {
         this.dt = dt;
     }
 
-    public void setOrder(boolean order) {
+    public void setOrder(int order) {
         this.order = order;
     }
 
@@ -118,14 +129,19 @@ public class Item implements Serializable {
 
     public String getSize() { return size; }
 
-    public boolean isOrder() {
+    public int getMoney() { return money; }
+
+    public int isOrder() {
         return order;
     }
 
     public String returnInfo() {
         String s;
         String en = "\n";
-        s = "크기 : " + getSize() + en + "무게 : " + getWeight() + en + "배달 시작 시간: " + getSt().toString() + en + "배달 종료 시간 :" + getDt().toString() + en + "요청 사항 : " + getRequest();
+        s = "크기 : " + getSize() + en + "무게 : " + getWeight() + en ;
+        if(getSt()!=null && getDt()!=null)
+            s+="배달 시작 시간: " + getSt().toString() + en + "배달 종료 시간 :" + getDt().toString() + en ;
+        s+="요청 사항 : " + getRequest();
         return s;
     }
 

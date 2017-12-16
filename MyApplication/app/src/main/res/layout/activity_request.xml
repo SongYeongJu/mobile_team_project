@@ -7,13 +7,19 @@
     android:orientation="vertical"
     tools:context="com.example.myapplication.Activity.RequestActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
+    <!--<ImageView-->
+        <!--android:id="@+id/imageView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:scaleType="centerInside"-->
+        <!--app:srcCompat="@drawable/mapimage" />-->
+
+    <LinearLayout
+        android:id="@+id/map_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:scaleType="centerInside"
-        app:srcCompat="@drawable/mapimage" />
+        android:orientation="vertical"/>
 
     <ScrollView
         android:layout_width="match_parent"
