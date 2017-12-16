@@ -31,11 +31,14 @@ public class ShowItemInfoActivity extends AppCompatActivity {
     }
 
     void setInfo() {
-        if (item != null) {
+        if (item == null) {
             item=Item.returnSempleItem();
             duserName.setText(item.getName());
             duserInfo.setText(item.returnInfo());
             item=null;
+        } else{
+            duserName.setText(item.getName());
+            duserInfo.setText(item.returnInfo());
         }
     }
 }

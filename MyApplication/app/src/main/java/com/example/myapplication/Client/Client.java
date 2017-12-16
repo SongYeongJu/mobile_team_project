@@ -403,14 +403,17 @@ public class Client {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        wait=true;
         mSocket.emit("customerDeposit", jsonCost);
         Emitter.Listener depositMoney = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                JSONArray arg = (JSONArray) args[0];
+                //JSONArray arg = (JSONArray) args[0];
+                JSONObject arg =(JSONObject)args[0];
                 try {
                     Log.d("test","deposit args"+args[0].toString());
-                    sum = arg.getJSONObject(0).getInt("sum");
+                    sum=arg.getInt("sum");
+                    //sum = arg.getJSONObject(0).getInt("sum");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -420,6 +423,7 @@ public class Client {
         };
         mSocket.on("customerDeposit", depositMoney);
         while (wait) ;
+        Log.d("test","deposit return "+sum);
         return sum;
     }
 
