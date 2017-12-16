@@ -34,6 +34,7 @@ public class ShowStartPointActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(item!=null) {
                     // new event
+                    client.startDelivery();
                 }
                 Intent intent = new Intent(ShowStartPointActivity.this, DeliveryInfoActivity_forDM.class);
                 startActivity(intent);

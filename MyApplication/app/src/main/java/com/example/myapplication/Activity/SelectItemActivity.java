@@ -36,6 +36,7 @@ public class SelectItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(item!=null) {
                     // new event
+                    client.AcceptDelivery(item);
                 }
                 Intent intent = new Intent(SelectItemActivity.this, DeliveryInfoActivity_forDM.class);
                 startActivity(intent);

@@ -23,7 +23,7 @@ public class Duser implements Serializable {
 
     public static Duser returnSample(){ return  new Duser("","","sample","010-3834-0371",3000,0,0,0,null); }
     public Duser(){}
-    public Duser(String id,String pw,String name,String phone,int money,int trust,int x,int y,Item item) {
+    public Duser(String id,String pw,String name,String phone,int money,int trust,double x,double y,Item item) {
         setId(id);
         setPw(pw);
         setName(name);
@@ -53,7 +53,7 @@ public class Duser implements Serializable {
     public void setItem(Item item) { this.item = item; }
     public void setName(String name) { this.name = name; }
     public void setLocation(Location location) { this.location = location; }
-    public void setLocation(int x,int y) { location=new Location(x,y); }
+    public void setLocation(double x,double y) { location=new Location(x,y); }
 
     public String getPhone() { return phone; }
     public String getId() { return id; }

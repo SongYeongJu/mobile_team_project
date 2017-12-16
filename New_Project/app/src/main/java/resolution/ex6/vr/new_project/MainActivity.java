@@ -4,16 +4,24 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-public class MainActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.CurrentLocationEventListener {
+public class MainActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.CurrentLocationEventListener, MapView.POIItemEventListener {
 
+//    ArrayList<MapPOIItem> start=new ArrayList<MapPOIItem>();
+//    ArrayList<MapPOIItem> destination=new ArrayList<MapPOIItem>();
+
+    private MapPOIItem mDefaultMarker;
     public static final MapPoint DEFAULT_MARKER_POINT=MapPoint.mapPointWithGeoCoord(35.87222, 128.60250);
     public MapView mapView;
+    public MapPOIItem[] start;
+    public MapPOIItem[] destination;
     MarkerActivity setMarker;
+    int flag=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +35,9 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
         mapViewContainer.addView(mapView);
         mapView.setMapViewEventListener(this); //지도 이동/확대/축소, 지도 화면 터치 이벤트 통보
         mapView.setCurrentLocationEventListener(this);
-
+        mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, true);
         Log.i("되는가", "응");
 //        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
-//        onMapViewDoubleTapped(mapView, DEFAULT_MARKER_POINT);
-        MapPOIItem marker=new MapPOIItem();
-        marker.setItemName("출발 위치");
-        marker.setTag(0);
-        marker.setMapPoint(DEFAULT_MARKER_POINT);
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-
-        mapView.addPOIItem(marker);
     }
 
     //MapViewEventListener
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
     @Override
     public void onMapViewCenterPointMoved(MapView mapView, MapPoint mapPoint) {
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(35.87222, 128.60250), true);
     }
 
     @Override
@@ -59,23 +57,54 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
     @Override
     public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo=mapPoint.getMapPointGeoCoord();
-        MapPoint.PlainCoordinate mapPointScreenLocation=mapPoint.getMapPointScreenLocation();
-        MapPoint sMapPoint=MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
-//        setMarker.createStartMarker(mapView, sMapPoint);
+        createStartMarker(mapView, mapPoint);
+    }
+
+    public void removeMarker(MapPOIItem poiItem){
+        mapView.removePOIItem(poiItem);
+    }
+
+    public void createStartMarker(MapView mapView, MapPoint mapPoint) {
+
+        mDefaultMarker = new MapPOIItem();
+        String name = "출발 위치";
+        mDefaultMarker.setItemName(name);
+        mDefaultMarker.setTag(0);
+        mDefaultMarker.setMapPoint(mapPoint);
+        mDefaultMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        mDefaultMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+
+        mapView.addPOIItem(mDefaultMarker);
+        mapView.selectPOIItem(mDefaultMarker, true);
+        start=new MapPOIItem[]{};
+
+        flag=1;
+//        mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, false);
     }
 
     @Override
     public void onMapViewDoubleTapped(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo=mapPoint.getMapPointGeoCoord();
-        MapPoint.PlainCoordinate mapPointScreenLocation=mapPoint.getMapPointScreenLocation();
-        MapPoint sMapPoint=MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
-//        setMarker.createDestinationMarker(mapView, sMapPoint);
+
+    }
+
+    public void createDestinationMarker(MapView mapView, MapPoint mapPoint) {
+        mDefaultMarker = new MapPOIItem();
+        String name = "도착 위치";
+        mDefaultMarker.setItemName(name);
+        mDefaultMarker.setTag(0);
+        mDefaultMarker.setMapPoint(mapPoint);
+        mDefaultMarker.setMarkerType(MapPOIItem.MarkerType.YellowPin);
+        mDefaultMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+
+        mapView.addPOIItem(mDefaultMarker);
+        mapView.selectPOIItem(mDefaultMarker, true);
+//        destination.add(mDefaultMarker);
+//        mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, false);
     }
 
     @Override
     public void onMapViewLongPressed(MapView mapView, MapPoint mapPoint) {
-
+        createDestinationMarker(mapView, mapPoint);
     }
 
     @Override
@@ -113,4 +142,23 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
     }
 
+    @Override
+    public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+        Toast.makeText(this, "Clicked"+mapPOIItem.getItemName()+" Callout Ballon", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+
+    }
+
+    @Override
+    public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+
+    }
 }

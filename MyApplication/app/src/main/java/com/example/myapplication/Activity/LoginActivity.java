@@ -18,12 +18,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplication.Client.Client;
 import com.example.myapplication.R;
@@ -63,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mPasswordView=(EditText)findViewById(R.id.password);
         populateAutoComplete();
 
         client = new Client();
@@ -135,7 +138,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     intent = new Intent(LoginActivity.this, MainForDmActivity.class);
                     break;
                 case 1:
-                    intent = new Intent(LoginActivity.this, MainForDmActivity.class);
+                    intent = new Intent(LoginActivity.this, SelectItemActivity.class);
                     break;
                 case 2:
                     intent = new Intent(LoginActivity.this, ShowStartPointActivity.class);
@@ -144,7 +147,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     intent = new Intent(LoginActivity.this, DeliveryInfoActivity_forDM.class);
                     break;
                 case 4:
-                    intent = new Intent(LoginActivity.this, MainForDmActivity.class);
+                    intent = new Intent(LoginActivity.this, WaitForRewardActivity.class);
                     break;
                 default:
                     intent = new Intent(LoginActivity.this, MainForDmActivity.class);
@@ -181,12 +184,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void attemptLogin() {
         CheckBox checkBox;
         checkBox = (CheckBox) findViewById(R.id.checkBox);
-//        if (client.Login(mEmailView.getText().toString(), mPasswordView.getText().toString())) {
-            event1(checkBox.isChecked(),3);
+        Log.d("test","attempt login :"+mEmailView.getText().toString()+"%"+mPasswordView.getText().toString()+":"+checkBox.isChecked());
+        if (client.Login(mEmailView.getText().toString(),mPasswordView.getText().toString(),checkBox.isChecked())) {
+            event1(checkBox.isChecked(), client.getEvent());
             finish();
-//        } else {
- //           Toast.makeText(getBaseContext(), "fail to login! check your id or pw", Toast.LENGTH_SHORT);
- //       }
+        } else{
+            Toast.makeText(getBaseContext(),"아이디와 패스워드를 다시 확인해주세요",Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean isEmailValid(String email) {

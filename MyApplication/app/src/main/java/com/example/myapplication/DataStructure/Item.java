@@ -30,7 +30,7 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    public Item(String name, int weight, String size, int dx, int dy, Date dt, int sx, int sy, Date st, String request,int order) {
+    public Item(String name, int weight, String size, double dx, double dy, Date dt, double sx, double sy, Date st, String request,int order) {
         setName(name);
         setWeight(weight);
         setSize(size);
@@ -65,9 +65,9 @@ public class Item implements Serializable {
         money=m;
     }
 
-    public void setSta(int x, int y) { this.sta = new Location(x, y); }
+    public void setSta(double x, double y) { this.sta = new Location(x, y); }
 
-    public void setDes(int x, int y) { this.des = new Location(x, y); }
+    public void setDes(double x,double y) { this.des = new Location(x, y); }
 
     public void setSize(String size) { this.size = size; }
 
@@ -138,7 +138,10 @@ public class Item implements Serializable {
     public String returnInfo() {
         String s;
         String en = "\n";
-        s = "크기 : " + getSize() + en + "무게 : " + getWeight() + en + "배달 시작 시간: " + getSt().toString() + en + "배달 종료 시간 :" + getDt().toString() + en + "요청 사항 : " + getRequest();
+        s = "크기 : " + getSize() + en + "무게 : " + getWeight() + en ;
+        if(getSt()!=null && getDt()!=null)
+            s+="배달 시작 시간: " + getSt().toString() + en + "배달 종료 시간 :" + getDt().toString() + en ;
+        s+="요청 사항 : " + getRequest();
         return s;
     }
 

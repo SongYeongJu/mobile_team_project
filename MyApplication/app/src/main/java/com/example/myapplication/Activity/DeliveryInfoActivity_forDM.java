@@ -46,6 +46,7 @@ public class DeliveryInfoActivity_forDM extends AppCompatActivity {
         completeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                client.RequestComp();
                 Intent intent = new Intent(DeliveryInfoActivity_forDM.this, WaitForRewardActivity.class);
                 startActivity(intent);
                 finish();

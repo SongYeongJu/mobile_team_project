@@ -21,6 +21,8 @@ public class ShowItemInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_item_info);
         client = Client.getInstance();
 
+        item=client.getItem();
+
         duserName = (TextView) findViewById(R.id.mItemName);
         duserInfo = (TextView) findViewById(R.id.mItemInfo);
 

@@ -35,6 +35,9 @@ public class DeliveryInfoActivity extends AppCompatActivity {
 
         client = Client.getInstance();
 
+        duser=client.getDuser();
+        item=client.getItem();
+
         itemName = (TextView) findViewById(R.id.delItemName);
         itemInfo = (TextView) findViewById(R.id.delItemInfo);
         duserName = (TextView) findViewById(R.id.delDuserName);
@@ -61,6 +64,7 @@ public class DeliveryInfoActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int button) {
                                 switch (button) {
                                     case DialogInterface.BUTTON_POSITIVE:
+                                        client.AcceptComp();
                                         Intent intent = new Intent(DeliveryInfoActivity.this, MainActivity.class);
                                         startActivity(intent);
                                         finish();

@@ -7,14 +7,14 @@ import java.io.Serializable;
  */
 
 public class Location implements Serializable {
-    private int x;
-    private int y;
-    public Location (int x,int y){
+    private double x;
+    private double y;
+    public Location (double x,double y){
         setX(x);
         setY(y);
     }
-    public int getX(){ return x; }
-    public int getY(){ return y; }
-    public void setX(int x){ this.x=x; }
-    public void setY(int y){ this.y=y; }
+    public double getX(){ return x; }
+    public double getY(){ return y; }
+    public void setX(double x){ this.x=x; }
+    public void setY(double y){ this.y=y; }
 }

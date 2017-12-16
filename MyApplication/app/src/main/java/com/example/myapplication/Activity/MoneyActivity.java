@@ -36,7 +36,7 @@ public class MoneyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int m=Integer.parseInt(getMoney.getText().toString());
-                user.setMoney(user.getMoney()+m);
+                user.setMoney(client.Deposit(m));
                 moneyText.setText(user.getMoney()+"원");
                 getMoney.setText("");
             }

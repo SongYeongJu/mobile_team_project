@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,6 +29,10 @@ public class ShowDmInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_dm_info);
         client = Client.getInstance();
+
+        duser=client.getDuser();
+        if(duser!=null) Log.d("test","ShowDmInfoActivity: duser>> "+duser.getName()+" "+duser.returnInfo());
+        else Log.d("test","ShowDmInfoActivity: duser>> null");
 
         duserName = (TextView) findViewById(R.id.mDuserName);
         duserInfo = (TextView) findViewById(R.id.mDuserInfo);
@@ -67,11 +72,14 @@ public class ShowDmInfoActivity extends AppCompatActivity {
     }
 
     void setInfo() {
-        if (duser != null) {
-            duser=Duser.returnSample();
+        if (duser == null) {
+            duser = Duser.returnSample();
             duserName.setText(duser.getName());
             duserInfo.setText(duser.returnInfo());
-            duser=null;
+            duser = null;
+        } else {
+            duserName.setText(duser.getName());
+            duserInfo.setText(duser.returnInfo());
         }
     }
 }
