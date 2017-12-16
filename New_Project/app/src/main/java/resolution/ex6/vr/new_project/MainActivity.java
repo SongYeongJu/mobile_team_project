@@ -1,6 +1,17 @@
 package resolution.ex6.vr.new_project;
 
+<<<<<<< HEAD
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+
+import android.support.v4.app.ActivityCompat;
+=======
+import android.os.Bundle;
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -11,6 +22,18 @@ import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 public class MainActivity extends AppCompatActivity implements MapView.MapViewEventListener, MapView.CurrentLocationEventListener, MapView.POIItemEventListener {
+<<<<<<< HEAD
+
+    private MapPOIItem mDefaultMarker;
+    private MapPOIItem mMarker;
+    public static final MapPoint DEFAULT_MARKER_POINT = MapPoint.mapPointWithGeoCoord(35.87222, 128.60250);
+    public MapView mapView;
+    GPSListener gpsListener=new GPSListener();
+    long minTime=10000;
+    float minDistance=0;
+
+//    MarkerActivity setMarker;
+=======
 
 //    ArrayList<MapPOIItem> start=new ArrayList<MapPOIItem>();
 //    ArrayList<MapPOIItem> destination=new ArrayList<MapPOIItem>();
@@ -22,22 +45,34 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
     public MapPOIItem[] destination;
     MarkerActivity setMarker;
     int flag=0;
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mapView=new MapView(this);
+        mapView = new MapView(this);
 
+<<<<<<< HEAD
+        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+=======
         ViewGroup mapViewContainer=(ViewGroup)findViewById(R.id.map_view);
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
         mapView.setDaumMapApiKey("9cd21f655ed0bbade4257691ce87f6ce");
         mapViewContainer.addView(mapView);
         mapView.setMapViewEventListener(this); //지도 이동/확대/축소, 지도 화면 터치 이벤트 통보
         mapView.setCurrentLocationEventListener(this);
         mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, true);
         Log.i("되는가", "응");
+<<<<<<< HEAD
+        createMarkerByCoordinate(mapView, 35.9, 129.3726);
+        startLocationService();
 //        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+//        mapView.setCurrentLocationEventListener(this);
+=======
+//        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
     }
 
     //MapViewEventListener
@@ -60,10 +95,14 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
         createStartMarker(mapView, mapPoint);
     }
 
+<<<<<<< HEAD
+    //출발 마커 생성
+=======
     public void removeMarker(MapPOIItem poiItem){
         mapView.removePOIItem(poiItem);
     }
 
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
     public void createStartMarker(MapView mapView, MapPoint mapPoint) {
 
         mDefaultMarker = new MapPOIItem();
@@ -76,9 +115,18 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
         mapView.addPOIItem(mDefaultMarker);
         mapView.selectPOIItem(mDefaultMarker, true);
+<<<<<<< HEAD
+        MapPoint mMapPoint = mDefaultMarker.getMapPoint();
+        double latitude = mMapPoint.getMapPointGeoCoord().latitude;
+        double longtitude = mMapPoint.getMapPointGeoCoord().longitude;
+
+        Log.i("latitude : ", String.valueOf(latitude));
+        Log.i("longtitude : ", String.valueOf(longtitude));
+=======
         start=new MapPOIItem[]{};
 
         flag=1;
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
 //        mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, false);
     }
 
@@ -87,8 +135,30 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
     }
 
+<<<<<<< HEAD
+    public void createMarkerByCoordinate(MapView mapView, double latitude, double longtitude) {
+        mMarker = new MapPOIItem();
+        MapPoint coordinate = MapPoint.mapPointWithGeoCoord(latitude, longtitude);
+
+        String name = "좌표";
+        mMarker.setItemName(name);
+        mMarker.setTag(0);
+        mMarker.setMapPoint(coordinate);
+        mMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        mMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+
+        mapView.addPOIItem(mMarker);
+        mapView.selectPOIItem(mMarker, false);
+    }
+
+    //도착 마커 생성
     public void createDestinationMarker(MapView mapView, MapPoint mapPoint) {
         mDefaultMarker = new MapPOIItem();
+
+=======
+    public void createDestinationMarker(MapView mapView, MapPoint mapPoint) {
+        mDefaultMarker = new MapPOIItem();
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
         String name = "도착 위치";
         mDefaultMarker.setItemName(name);
         mDefaultMarker.setTag(0);
@@ -98,6 +168,14 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
         mapView.addPOIItem(mDefaultMarker);
         mapView.selectPOIItem(mDefaultMarker, true);
+<<<<<<< HEAD
+        MapPoint mMapPoint = mDefaultMarker.getMapPoint();
+        double latitude = mMapPoint.getMapPointGeoCoord().latitude;
+        double longtitude = mMapPoint.getMapPointGeoCoord().longitude;
+        Log.i("latitude : ", String.valueOf(latitude));
+        Log.i("longtitude : ", String.valueOf(longtitude));
+=======
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
 //        destination.add(mDefaultMarker);
 //        mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, false);
     }
@@ -122,8 +200,11 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
     }
 
+<<<<<<< HEAD
     @Override
-    public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
+    public void onCurrentLocationUpdate(MapView mapView, MapPoint currentLocation, float accuracyInMeters) {
+        MapPoint.GeoCoordinate mapPointGeo = currentLocation.getMapPointGeoCoord();
+        Log.i("손대지마", String.format("MapView onCurrentLocationUpdate (%f,%f) accuracy (%f)", mapPointGeo.latitude, mapPointGeo.longitude, accuracyInMeters));
 
     }
 
@@ -142,6 +223,61 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
     }
 
+=======
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
+    @Override
+    public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
+
+    }
+
+    @Override
+<<<<<<< HEAD
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+        Toast.makeText(this, "Clicked" + mapPOIItem.getItemName() + " Callout Ballon", Toast.LENGTH_SHORT).show();
+=======
+    public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
+
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
+    }
+
+    @Override
+    public void onCurrentLocationUpdateFailed(MapView mapView) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdateCancelled(MapView mapView) {
+
+    }
+
+<<<<<<< HEAD
+    public void startLocationService() {
+        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location lastLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if(lastLocation!=null){
+            double latitude=lastLocation.getLatitude();
+            double longtitude=lastLocation.getLongitude();
+            MapPoint currentCoordinate=MapPoint.mapPointWithGeoCoord(latitude, longtitude);
+            mapView.setMapCenterPoint(currentCoordinate, true);
+            Log.i("Latitude/Longtitude", String.valueOf(latitude)+String.valueOf(longtitude));
+        }
+        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
+        Toast.makeText(getApplicationContext(), "위치 확인이 시작되었슴",Toast.LENGTH_SHORT).show();
+
+    }
+}
+=======
     @Override
     public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
 
@@ -162,3 +298,4 @@ public class MainActivity extends AppCompatActivity implements MapView.MapViewEv
 
     }
 }
+>>>>>>> 5b3db13f81b6c8968e5fed9d07a83b3d67165bef
